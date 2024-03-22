@@ -50,7 +50,7 @@ def recommend_similar_songs(driver, track_id):
         driver: driver for neo4j
         track_id (str): id of the track to find similar songs to.
     """
-    query =   f"MATCH (source {{track_id:'{track_id}'}})-[r:Similar]->(target) WITH DISTINCT target, r.score AS score RETURN target.track_id AS track_id, target.track_name AS track_name, target.artists AS artists ORDER BY score DESC LIMIT 5"
+    query =   f"MATCH (source {{track_id:'{track_id}'}})-[r:Similar]->(target) WITH DISTINCT target, r.score AS score RETURN target.track_id AS track_id, target.track_name AS track_name, target.artists AS artists ORDER BY score DESC"
     with driver.session() as session:
         result = session.run(query)
         result = list(result)
